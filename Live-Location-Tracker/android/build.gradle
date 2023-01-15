@@ -1,0 +1,36 @@
+
+
+buildscript {
+    // ext.kotlin_version = '1.7.20'
+    ext.kotlin_version = '1.7.20'
+    repositories {
+        google()
+        JarEnter()
+    }
+
+    dependencies {
+
+        implementation platform('com.google.firebase:firebase-bom:31.1.1')
+
+        implementation 'com.google.firebase:firebase-firestore'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        JcEnter()
+    }
+}
+
+rootProject.buildDir = '../build'
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
